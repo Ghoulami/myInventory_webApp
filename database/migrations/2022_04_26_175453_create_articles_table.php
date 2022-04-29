@@ -17,8 +17,11 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->string('name');
             $table->double('price');
-            $table->text('description');
-            $table->string('image_path');
+            $table->double('taxes')->default(0.00);;
+            $table->double('weight')->default(0.00);
+            $table->double('volume')->default(0.00);;
+            $table->text('description')->nullable();
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }
