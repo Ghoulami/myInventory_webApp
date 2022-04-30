@@ -15,7 +15,13 @@ class CreateArticlePurchaseTable extends Migration
     {
         Schema::create('article_purchase', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('article_id');
+            $table->unsignedInteger('purchase_id');
+            $table->double('qte')->default(0);
             $table->timestamps();
+
+            $table->foreign('article_id')->references('id')->on('articles');
+            $table->foreign('purchase_id')->references('id')->on('purchases');
         });
     }
 

@@ -17,12 +17,16 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->string('name');
             $table->double('price');
-            $table->double('taxes')->default(0.00);;
+            $table->double('taxes')->default(0.00);
             $table->double('weight')->default(0.00);
-            $table->double('volume')->default(0.00);;
+            $table->double('volume')->default(0.00);
+            $table->double('qteInStock')->default(0.00);
             $table->text('description')->nullable();
             $table->string('image_path')->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign("category_id")->references("id")->on("categories");
         });
     }
 

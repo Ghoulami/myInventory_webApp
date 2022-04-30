@@ -15,7 +15,13 @@ class CreateFacturesTable extends Migration
     {
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
+            $table->string("registrationNumber");
+            $table->string("status")->default("penddig");
+            $table->date("closed_at")->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('order_id');
+            $table->foreign("order_id")->references("id")->on("orders");
         });
     }
 

@@ -15,7 +15,12 @@ class CreateClientOrderTable extends Migration
     {
         Schema::create('client_order', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('client_id');
+            $table->unsignedInteger('order_id');
             $table->timestamps();
+
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 

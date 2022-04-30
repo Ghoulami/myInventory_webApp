@@ -15,7 +15,13 @@ class CreateArticleOrderTable extends Migration
     {
         Schema::create('article_order', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('article_id');
+            $table->unsignedInteger('order_id');
+            $table->double('qte')->default(0);
             $table->timestamps();
+
+            $table->foreign('article_id')->references('id')->on('articles');
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 
