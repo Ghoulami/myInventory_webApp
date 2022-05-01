@@ -27,6 +27,9 @@ class CreateArticlesTable extends Migration
 
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign("category_id")->references("id")->on("categories");
+
+            $table->unsignedBigInteger('stock_id')->nullable();
+            $table->foreign("stock_id")->references("id")->on("stocks");
         });
     }
 

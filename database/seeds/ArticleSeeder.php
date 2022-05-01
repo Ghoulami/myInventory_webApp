@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Article;
 
 class ArticleSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class ArticleSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Article::class, 10)->create([ 'created_at' => \Carbon\Carbon::now()->toDateTimeString(), 'updated_at' => "", ]);
+        factory(Article::class, 10)->create();
     }
 }

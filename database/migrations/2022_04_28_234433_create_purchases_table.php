@@ -21,7 +21,7 @@ class CreatePurchasesTable extends Migration
             $table->double("total")->default(0.00);
             $table->timestamps();
 
-            $table->unsignedBigInteger('provider_id');
+            $table->unsignedBigInteger('provider_id')->nullable();
             $table->foreign("provider_id")->references("id")->on("providers");
         });
     }
