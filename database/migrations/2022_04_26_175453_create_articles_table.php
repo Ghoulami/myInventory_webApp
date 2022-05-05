@@ -18,9 +18,9 @@ class CreateArticlesTable extends Migration
             $table->string('name');
             $table->double('price');
             $table->double('taxes')->default(0.00);
-            $table->double('weight')->default(0.00);
-            $table->double('volume')->default(0.00);
-            $table->double('qteInStock')->default(0.00);
+            $table->double('weight')->default(0.00)->nullable();
+            $table->double('volume')->default(0.00)->nullable();
+            $table->double('qteInStock')->default(0.00)->nullable();
             $table->text('description')->nullable();
             $table->string('image_path')->nullable();
             $table->timestamps();

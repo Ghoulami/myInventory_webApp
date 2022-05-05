@@ -40,4 +40,23 @@ body.show-spinner::before{
   }
 }
 
+.header-large{
+    padding: 0.40rem !important;
+    flex-direction: space-around !important;
+}
+
+.text-center{
+    align-items: center;
+}
+
+@media (max-width: 991px) {
+    .header-large{
+        display: none !important;
+    }
+}
+
+.rounded{
+    border-radius: 30%;
+}
+
 

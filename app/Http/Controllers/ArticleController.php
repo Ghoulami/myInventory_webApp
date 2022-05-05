@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -12,9 +14,11 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Article $article)
     {
-        return view('Articles.index');
+        return view('Articles.index', [
+            'articles' =>  $article->allArticles()
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('Articles.create');
     }
 
     /**
@@ -35,7 +39,28 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $path = 'storage/images/noImage.png';
+
+        if ($request->hasFile('image'))
+        {
+            $path = 'storage/'.$request->file('image')->store('images');
+        }
+
+        Article::create([
+            "name" => $request->name,
+            "price" => $request->price,
+            "taxes" => $request->taxes,
+            "weight" => $request->weight,
+            "volume" => $request->volume,
+            "qteInStock"=> $request->qte,
+            "description"=> $request->description,
+            "image_path"=> $path,
+            "category_id" => $request->category,
+            "stock_id" => 1
+        ]);
+
+        Artisan::call('storage:link');
+        return redirect()->route('Articles.index');
     }
 
     /**
@@ -81,5 +106,15 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         //
+    }
+
+    public function validateArticle(){
+        return request()->validate([
+            "name" => 'required|unique:App\Article,name',
+            "price" => 'required',
+            "taxes" => 'required',
+            "qteInStock"=> 'required',
+            "image_path"=> 'image|mimes:jpg,png,jpeg,gif,svg'
+        ]);
     }
 }

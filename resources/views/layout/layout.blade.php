@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="{{URL::asset('css/vendor/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/vendor/fullcalendar.min.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('css/vendor/bootstrap-float-label.min.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/vendor/dataTables.bootstrap4.min.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/vendor/datatables.responsive.bootstrap4.min.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/vendor/select2.min.css')}}" />
@@ -19,7 +20,12 @@
     <link rel="stylesheet" href="{{URL::asset('css/vendor/bootstrap-stars.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/vendor/nouislider.min.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/vendor/bootstrap-datepicker3.min.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('css/vendor/dropzone.min.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('css/vendor/bootstrap-tagsinput.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('css/vendor/component-custom-switch.min.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('css/vendor/cropper.min.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/main.css')}}" />
+
 </head>
 
 <body id="app-container" class="menu-default show-spinner">
@@ -110,7 +116,7 @@
 
                         <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                             <a href="#">
-                                <img src="img/profile-pic-l-2.jpg" alt="Notification Image" class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                                <img src="/img/profile-pic-l-2.jpg" alt="Notification Image" class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
                             </a>
                             <div class="pl-3 pr-2">
                                 <a href="#">
@@ -122,7 +128,7 @@
 
                         <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                             <a href="#">
-                                <img src="img/notification-thumb.jpg" alt="Notification Image" class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                                <img src="/img/notification-thumb.jpg" alt="Notification Image" class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
                             </a>
                             <div class="pl-3 pr-2">
                                 <a href="#">
@@ -135,7 +141,7 @@
 
                         <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                             <a href="#">
-                                <img src="img/notification-thumb-2.jpg" alt="Notification Image" class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                                <img src="/img/notification-thumb-2.jpg" alt="Notification Image" class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
                             </a>
                             <div class="pl-3 pr-2">
                                 <a href="#">
@@ -147,7 +153,7 @@
 
                         <div class="d-flex flex-row mb-3 pb-3 ">
                             <a href="#">
-                                <img src="img/notification-thumb-3.jpg" alt="Notification Image" class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                                <img src="/img/notification-thumb-3.jpg" alt="Notification Image" class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
                             </a>
                             <div class="pl-3 pr-2">
                                 <a href="#">
@@ -172,7 +178,7 @@
                     aria-expanded="false">
                     <span class="name">Sarah Kortney</span>
                     <span>
-                        <img alt="Profile Picture" src="img/profile-pic-l.jpg" />
+                        <img alt="Profile Picture" src="/img/profile-pic-l.jpg" />
                     </span>
                 </button>
 
@@ -197,9 +203,9 @@
                         </a>
                     </li>
                     <li class="{{Request::is('Articles*') ? 'active' : '' }}">
-                        <a href="#articles">
+                        <a href="#stock">
                             <i class="iconsmind-Shop-4"></i>
-                            <span>Articles</span>
+                            <span>Stock</span>
                         </a>
                     </li>
                     <li>
@@ -229,7 +235,7 @@
         <div class="sub-menu">
             <div class="scroll">
                 <ul class="list-unstyled" data-link="dashboard">
-                    <li class="active">
+                    <li>
                         <a href="Dashboard.Default.html">
                             <i class="simple-icon-rocket"></i> Default
                         </a>
@@ -251,14 +257,14 @@
                     </li>
                 </ul>
 
-                <ul class="list-unstyled" data-link="articles">
-                    <li>
+                <ul class="list-unstyled" data-link="stock">
+                    <li class="{{Request::is('Articles') ? 'active' : '' }}">
                         <a href="{{ route("Articles.index") }}">
                             <i class="simple-icon-credit-card"></i> Articles List
                         </a>
                     </li>
-                    <li>
-                        <a href="Layouts.Thumbs.html">
+                    <li class="{{Request::is('Articles/create') ? 'active' : '' }}">
+                        <a href="{{ route('Articles.create') }}">
                             <i class="simple-icon-list"></i> New Article
                         </a>
                     </li>
@@ -522,6 +528,11 @@
     <script src="{{URL::asset('js/vendor/Sortable.js')}}"></script>
     <script src="{{URL::asset('js/vendor/mousetrap.min.js')}}"></script>
     <script src="{{URL::asset('js/dore.script.js')}}"></script>
+    <script src="{{URL::asset('js/vendor/bootstrap-notify.min.js')}}"></script>
+    <script src="{{URL::asset('js/vendor/dropzone.min.js')}}"></script>
+    <script src="{{URL::asset('js/vendor/bootstrap-tagsinput.min.js')}}"></script>
+    <script src="{{URL::asset('js/vendor/cropper.min.js')}}"></script>
+    <script src="{{URL::asset('js/vendor/typeahead.bundle.js')}}"></script>
     <script src="{{URL::asset('js/scripts.js')}}"></script>
 </body>
 

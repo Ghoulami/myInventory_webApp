@@ -1,4 +1,4 @@
-/* Dore Main Style 
+/* Dore Main Style
 
 Table of Contents
 
@@ -1150,6 +1150,10 @@ button {
 }
 
 /* 03.Widths */
+.w-5 {
+    width: 5% !important;
+}
+
 .w-10 {
     width: 10% !important;
 }
@@ -5684,7 +5688,7 @@ a.ck.ck-button.ck-on:not(.ck-disabled):hover {
         .navbar-logo {
             width: 120px;
             height: 40px;
-           
+
             .white {
                 display: inline-block;
                 width: 120px;
@@ -5878,7 +5882,7 @@ a.ck.ck-button.ck-on:not(.ck-disabled):hover {
             margin-bottom: 100px;
             padding-top: 60px;
         }
-        
+
         &.home {
             background: url($lpBackgroundHome);
             background-repeat: no-repeat;
