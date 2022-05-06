@@ -69,9 +69,11 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(Article $Article)
     {
-        //
+        return view('Articles.show', [
+            'article' => $Article
+        ]);
     }
 
     /**
