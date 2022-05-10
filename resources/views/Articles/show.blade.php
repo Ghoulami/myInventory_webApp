@@ -7,8 +7,14 @@
             <h1>{{ $article->name }}</h1>
             <div class="float-sm-right text-zero">
                 <div class="btn-group">
-                    <a href="{{ route('Articles.edit', $article) }}" class="btn btn-outline-success">Modifier l'article</a>
-                    <a href="{{ route('Articles.destroy', $article) }}" class="btn btn-outline-danger">Supprimer l'article</a>
+                    <a href="{{ route('articles.edit', $article) }}" class="btn btn-outline-success">Modifier l'article</a>
+                </div>
+                <div class="btn-group">
+                    <form action="{{ route('articles.destroy', $article) }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger">Supprimer l'article</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -39,7 +45,7 @@
                     </div>
                 </div>
                 <footer>
-                    <p class="text-muted text-small mb-0 font-weight-light">{{ $article->created_at }}</p>
+                    <p class="text-muted text-small mb-0 font-weight-light">{{ $article->created_at->format('m/d/Y') }}</p>
                 </footer>
             </div>
         </div>

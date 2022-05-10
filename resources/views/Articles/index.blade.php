@@ -8,7 +8,7 @@
             <h1>Liste des articles</h1>
             <div class="float-sm-right text-zero">
                 <div class="btn-group">
-                    <a href="{{ route('Articles.create') }}" class="btn btn-primary btn-lg text-white">ADD NEW</a>
+                    <a href="{{ route('articles.create') }}" class="btn btn-primary btn-lg text-white">ADD NEW</a>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
                 <div class="pl-2 d-flex flex-grow-1 min-width-zero">
                     <div class="header-large card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
                         <h6 class="mb-1 w-10 w-sm-100 text-center">Image</h6>
-                        <h6 class="mb-1 w-10 w-sm-100 text-center">Nom</h6>
+                        <h6 class="mb-1 w-20 w-sm-100 text-center">Nom</h6>
                         <h6 class="mb-1 w-20 w-sm-100 text-center">Prix</h6>
                         <h6 class="mb-1 w-10 w-sm-100 text-center">Taxes</h6>
                         <h6 class="mb-1 w-15 w-sm-100 text-center">Qte dans le stock</h6>
@@ -31,18 +31,18 @@
 
             @foreach ($articles as $article)
                 <div class="card d-flex flex-row mb-3">
-                    <a class="d-flex w-10" href="{{ route('Articles.show', $article ) }}">
+                    <a class="d-flex w-10" href="{{ route('articles.show', $article ) }}">
                         <img src="{{ asset($article->image_path) }}" alt="Fat Rascal" class="list-thumbnail responsive border-0" />
                     </a>
 
                     <div class="pl-2 d-flex flex-grow-1 min-width-zero">
                         <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
-                            <a href="{{ route('Articles.show', $article ) }}" class="w-25 w-sm-100">
-                                <p class="list-item-heading mb-1 truncate">{{ $article->name }}</p>
+                            <a href="{{ route('articles.show', $article ) }}" class="w-25 w-sm-100">
+                                <p class="list-item-heading mb-1 truncate text-center">{{ $article->name }}</p>
                             </a>
-                            <p class="mb-1 w-20 w-sm-100">{{ $article->price }} Dhs</p>
-                            <p class="mb-1 w-15 w-sm-100">TVA: {{ $article->taxes }} %</p>
-                            <div class="w-15 w-sm-100">
+                            <p class="mb-1 w-20 w-sm-100 text-center">{{ $article->price }} Dhs</p>
+                            <p class="mb-1 w-15 w-sm-100 text-center">TVA: {{ $article->taxes }} %</p>
+                            <div class="w-15 w-sm-100 text-center">
                                 <span class="badge badge-pill {{ $article->qteInStock > 0 ? ($article->qteInStock <= 5 ? 'badge-warning' : 'badge-primary') : 'badge-danger' }} text-extra-small">{{ (int)$article->qteInStock }} Unité</span>
                             </div>
                             <p class="mb-1 w-15 w-sm-100 text-center">{{ isset($article->category) ? $article->category->groupeName : '-'  }}</p>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\category;
+use App\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -12,9 +12,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category)
     {
-        //
+        return view('Categories.index', [
+            'categories' => $category->allCategories()
+        ]);
     }
 
     /**
@@ -35,7 +37,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'groupeName' => 'required|unique:App\Category,groupeName',
+        ]);
+
+        Category::create([
+            '_token' => csrf_token(),
+            'groupeName' => $request->groupeName
+        ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**

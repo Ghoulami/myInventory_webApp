@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>My Inventory</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @yield("metaSection")
 
     <link rel="stylesheet" href="{{URL::asset('font/iconsmind/style.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('font/simple-line-icons/css/simple-line-icons.css')}}" />
@@ -202,7 +203,7 @@
                             <span>Dashboards</span>
                         </a>
                     </li>
-                    <li class="{{Request::is('Articles*') ? 'active' : '' }}">
+                    <li class="{{Request::is('articles*') || Request::is('categories*') ? 'active' : '' }}">
                         <a href="#stock">
                             <i class="iconsmind-Shop-4"></i>
                             <span>Stock</span>
@@ -258,38 +259,21 @@
                 </ul>
 
                 <ul class="list-unstyled" data-link="stock">
-                    <li class="{{Request::is('Articles') ? 'active' : '' }}">
-                        <a href="{{ route("Articles.index") }}">
+                    <li class="{{Request::is('articles') ? 'active' : '' }}">
+                        <a href="{{ route("articles.index") }}">
                             <i class="simple-icon-credit-card"></i> Articles List
                         </a>
                     </li>
-                    <li class="{{Request::is('Articles/create') ? 'active' : '' }}">
-                        <a href="{{ route('Articles.create') }}">
+                    <li class="{{Request::is('articles/create') ? 'active' : '' }}">
+                        <a href="{{ route('articles.create') }}">
                             <i class="simple-icon-list"></i> New Article
                         </a>
                     </li>
-                    <li>
-                        <a href="Layouts.Thumbs.html">
-                            <i class="simple-icon-list"></i> Add Article
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Layouts.Images.html">
-                            <i class="simple-icon-grid"></i> Edit Article
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Layouts.Details.html">
-                            <i class="simple-icon-book-open"></i> Delete Article
-                        </a>
-                    </li>
-                    <li>
-                        <a href="Layouts.Search.html">
+                    <li class="{{Request::is('categories') ? 'active' : '' }}">
+                        <a href="{{ route('categories.index') }}">
                             <i class="simple-icon-magnifier"></i> Categories
                         </a>
                     </li>
-
-
                 </ul>
                 <ul class="list-unstyled" data-link="applications">
                     <li>
@@ -534,6 +518,8 @@
     <script src="{{URL::asset('js/vendor/cropper.min.js')}}"></script>
     <script src="{{URL::asset('js/vendor/typeahead.bundle.js')}}"></script>
     <script src="{{URL::asset('js/scripts.js')}}"></script>
+
+    @yield('jsSection')
 </body>
 
 </html>

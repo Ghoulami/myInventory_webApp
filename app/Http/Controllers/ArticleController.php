@@ -28,7 +28,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('Articles.create');
+        return view('Articles.create', [
+            'article' => new Article()
+        ]);
     }
 
     /**
@@ -39,6 +41,9 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
+        $this->validateArticle($request);
+
         $path = 'storage/images/noImage.png';
 
         if ($request->hasFile('image'))
@@ -52,7 +57,7 @@ class ArticleController extends Controller
             "taxes" => $request->taxes,
             "weight" => $request->weight,
             "volume" => $request->volume,
-            "qteInStock"=> $request->qte,
+            "qteInStock"=> $request->qteInStock,
             "description"=> $request->description,
             "image_path"=> $path,
             "category_id" => $request->category,
@@ -60,7 +65,7 @@ class ArticleController extends Controller
         ]);
 
         Artisan::call('storage:link');
-        return redirect()->route('Articles.index');
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -69,10 +74,10 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $Article)
+    public function show(Article $article)
     {
-        return view('Articles.show', [
-            'article' => $Article
+        return view('articles.show', [
+            'article' => $article
         ]);
     }
 
@@ -84,7 +89,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit', [
+            'article'=> $article
+        ]);
     }
 
     /**
@@ -96,7 +103,31 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $validateInpts = $this->validateArticle($request);
+
+        $path = $request->hideImage;
+
+        if ($request->hasFile('image_path'))
+        {
+            $path = 'storage/'.$request->file('image_path')->store('images');
+        }
+
+        $article->fill([
+                "name" => $request->name,
+                "price" => $request->price,
+                "taxes" => $request->taxes,
+                "weight" => $request->weight,
+                "volume" => $request->volume,
+                "qteInStock"=> $request->qteInStock,
+                "description"=> $request->description,
+                "image_path"=> $path,
+                "category_id" => $request->category,
+                "stock_id" => 1
+        ]);
+
+        $article->save();
+        Artisan::call('storage:link');
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -107,11 +138,13 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('articles.index');
     }
 
-    public function validateArticle(){
-        return request()->validate([
+    public function validateArticle(Request $request)
+    {
+        return $request->validate([
             "name" => 'required|unique:App\Article,name',
             "price" => 'required',
             "taxes" => 'required',

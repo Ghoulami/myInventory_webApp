@@ -22,4 +22,5 @@ Route::get('/', function () {
 // });
 
 
-Route::resource('Articles', ArticleController::class);
+Route::resource('articles', ArticleController::class);
+Route::resource('categories', CategoryController::class)->only(['index', 'store']);

@@ -59,4 +59,19 @@ body.show-spinner::before{
     border-radius: 30%;
 }
 
+.invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-flag {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.hide {
+    display: none !important;
+}
+
 
