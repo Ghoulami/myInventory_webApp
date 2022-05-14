@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\client;
+use App\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -12,9 +12,11 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Client $client)
     {
-        //
+        return view('Client.index', [
+            'clients' => $client->allClient()
+        ]);
     }
 
     /**
@@ -35,7 +37,19 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Client::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'adresse' => $request->adresse,
+            'type' => $request->type,
+        ]);
+
+        return redirect()->route('clients.index');
     }
 
     /**

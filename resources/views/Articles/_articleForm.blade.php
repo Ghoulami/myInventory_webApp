@@ -92,6 +92,9 @@
                    <label for="category">Categorie</label>
                    <select id="category" name="category" class="form-control">
                        <option value="">Séléctioner...</option>
+                       @foreach ($categories as $cateory)
+                        <option {{ isset($article->category) && ($cateory->id ==  $article->category->id) ? 'selected' : ''}} value="{{ $cateory->id }}">{{ $cateory->groupeName }}</option>
+                       @endforeach
                    </select>
                </div>
            </div>

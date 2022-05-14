@@ -10,11 +10,14 @@
                     <a href="{{ route('articles.edit', $article) }}" class="btn btn-outline-success">Modifier l'article</a>
                 </div>
                 <div class="btn-group">
-                    <form action="{{ route('articles.destroy', $article) }}" method="post">
+
+                    <button type="submit" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmDeleteModal">Supprimer l'article</button>
+
+                    {{-- <form action="{{ route('articles.destroy', $article) }}" method="post">
                         @method('delete')
                         @csrf
                         <button type="submit" class="btn btn-outline-danger">Supprimer l'article</button>
-                    </form>
+                    </form> --}}
                 </div>
             </div>
         </div>
@@ -64,6 +67,30 @@
 
             <p class="text-muted mb-2">Qte dans le stock</p>
             <span class="badge badge-pill {{ $article->qteInStock > 0 ? ($article->qteInStock <= 5 ? 'badge-warning' : 'badge-primary') : 'badge-danger' }} text-small">{{ (int)$article->qteInStock }} Unité</span>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">confirmation de l'opération suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                voulez vous vraiment supprimer ce Article ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Quiter</button>
+                <form action="{{ route('articles.destroy', $article) }}" method="post">
+                    @method('delete')
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
@@ -16,6 +17,8 @@ class ArticleController extends Controller
      */
     public function index(Article $article)
     {
+        $category = new Category();
+
         return view('Articles.index', [
             'articles' =>  $article->allArticles()
         ]);
@@ -28,8 +31,10 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        $category = new Category();
         return view('Articles.create', [
-            'article' => new Article()
+            'article' => new Article(),
+            'categories' => $category->allCategories()
         ]);
     }
 
@@ -42,6 +47,9 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //dd($request);
+        $request->validate([
+            "name" => 'unique:App\Article,name',
+        ]);
         $this->validateArticle($request);
 
         $path = 'storage/images/noImage.png';
@@ -89,8 +97,10 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        $category = new Category();
         return view('articles.edit', [
-            'article'=> $article
+            'article'=> $article,
+            'categories' => $category->allCategories()
         ]);
     }
 
@@ -103,7 +113,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $validateInpts = $this->validateArticle($request);
+        $this->validateArticle($request);
 
         $path = $request->hideImage;
 
@@ -145,7 +155,7 @@ class ArticleController extends Controller
     public function validateArticle(Request $request)
     {
         return $request->validate([
-            "name" => 'required|unique:App\Article,name',
+            "name" => 'required',
             "price" => 'required',
             "taxes" => 'required',
             "qteInStock"=> 'required',

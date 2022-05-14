@@ -209,9 +209,9 @@
                             <span>Stock</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#applications">
-                            <i class="iconsmind-Air-Balloon"></i> Applications
+                    <li class="{{Request::is('clients*') ? 'active' : '' }}">
+                        <a href="#orders">
+                            <i class="iconsmind-Air-Balloon"></i> Orders
                         </a>
                     </li>
                     <li>
@@ -275,27 +275,29 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="list-unstyled" data-link="applications">
+                <ul class="list-unstyled" data-link="orders">
                     <li>
                         <a href="Apps.MediaLibrary.html">
-                            <i class="simple-icon-picture"></i> Library <span class="badge badge-pill badge-outline-primary float-right mr-4">NEW</span>
+                            <i class="simple-icon-picture"></i> Orders
+                            {{-- <span class="badge badge-pill badge-outline-primary float-right mr-4">NEW</span> --}}
                         </a>
                     </li>
                     <li>
                         <a href="Apps.Todo.List.html">
-                            <i class="simple-icon-check"></i> Todo
+                            <i class="simple-icon-check"></i> Nouvelle order
                         </a>
                     </li>
                     <li>
-                        <a href="Apps.Survey.List.html">
-                            <i class="simple-icon-calculator"></i> Survey
+                        <a href="Apps.Todo.List.html">
+                            <i class="simple-icon-check"></i> Factures
+                        </a>
+                    </li>
+                    <li class="{{Request::is('clients') ? 'active' : '' }}">
+                        <a href="{{ route('clients.index') }}">
+                            <i class="simple-icon-calculator"></i> Clients
                         </a>
                     </li>
                     <li>
-                        <a href="Apps.Chat.html">
-                            <i class="simple-icon-bubbles"></i> Chat
-                        </a>
-                    </li>
                 </ul>
                 <ul class="list-unstyled" data-link="ui">
                     <li>

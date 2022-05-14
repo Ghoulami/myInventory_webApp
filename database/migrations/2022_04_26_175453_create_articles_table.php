@@ -26,10 +26,10 @@ class CreateArticlesTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign("category_id")->references("id")->on("categories");
+            $table->foreign("category_id")->references("id")->on("categories")->onDelete('set null');
 
             $table->unsignedBigInteger('stock_id')->nullable();
-            $table->foreign("stock_id")->references("id")->on("stocks");
+            $table->foreign("stock_id")->references("id")->on("stocks")->onDelete('cascade');
         });
     }
 

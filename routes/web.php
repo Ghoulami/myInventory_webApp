@@ -24,3 +24,4 @@ Route::get('/', function () {
 
 Route::resource('articles', ArticleController::class);
 Route::resource('categories', CategoryController::class)->only(['index', 'store']);
+Route::resource('clients', ClientController::class)->except(['create']);
